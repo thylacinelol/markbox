@@ -1,0 +1,57 @@
+body {
+  background: #ebeef5;
+}
+
+.markbox__files {
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #bfc2c9;
+  display: none;
+  flex-direction: column;
+  margin: 5rem auto;
+  max-width: 30rem;
+  padding: 1rem 2rem;
+}
+
+.markbox__file {
+  background: none;
+  border-bottom: 1px solid #ebeef5;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+  font-size: 1.7rem;
+  line-height: 1.5;
+  margin: 0 0 1rem;
+}
+
+.markbox__overlay {
+  background: #ebeef5;
+  display: none;
+  height: 100vh;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1000;
+}
+
+.markbox__close-overlay {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 1002;
+}
+
+.markbox__spinner {
+  color: black;
+  display: none;
+  z-index: 1001;
+}
+
+.markbox__svg {
+  height: 100vh;
+  width: 100vw;
+  z-index: 1002;
+}
