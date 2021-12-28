@@ -89,9 +89,10 @@ export default class extends Controller {
   openOverlay(e) {
     const filename = e.target.dataset.filename;
 
-    this.spinnerTarget.style.display = 'block';
+    this.spinnerTarget.style.display = 'flex';
     this.overlayTarget.style.display = 'block';
     this.svgTarget.innerHTML = '';
+    document.body.classList.add('overlay-open');
 
     const dbx = new Dropbox({
       accessToken: this.getAccessTokenFromStorage(),
@@ -120,6 +121,7 @@ export default class extends Controller {
   closeOverlay(e) {
     this.overlayTarget.style.display = 'none';
     this.svgTarget.innerHTML = '';
+    document.body.classList.remove('overlay-open');
   }
 
   requestAccessToken() {}
