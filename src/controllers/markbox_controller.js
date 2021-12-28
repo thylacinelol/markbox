@@ -19,7 +19,7 @@ const {
 } = markmap;
 
 export default class extends Controller {
-  static targets = ['auth', 'files', 'overlay', 'spinner', 'svg'];
+  static targets = ['auth', 'files', 'overlay', 'spinner', 'svg', 'error'];
 
   connect() {
     this.CLIENT_ID = 'lo5aq569kwde9cd';
@@ -52,9 +52,23 @@ export default class extends Controller {
       .then((response) => {
         this.renderFiles(response.result.entries);
       })
-      .catch((error) => {
-        console.error(error);
+      .catch((e) => {
+        console.error(e);
+
+        if (e.error) {
+          console.error(e.error.error_summary);
+          this.handleDropboxError(e.error);
+        }
       });
+  }
+
+  handleDropboxError(error) {
+    if (error.error['.tag'] === 'expired_access_token') {
+      window.localStorage.removeItem('markbox:access_token');
+      this.errorTarget.innerHTML = `Dropbox token expired <a href=".">click here</a> to reload the page.`;
+    } else {
+      this.errorTarget.innerHTML = `Error: <span>${error.error_summary}</span>`;
+    }
   }
 
   renderFiles(files) {
